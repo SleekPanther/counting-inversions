@@ -3,16 +3,15 @@ import java.util.*;
 public class CountingInversions {
 
 	public static void main(String[] args) {
-		Integer[] array = {3,2,1};
+		int[] array = {3,2,1};
 		CountingInversions.mergeSort(array);
 		System.out.println(Arrays.toString( array ) );
 	}
 
-	public static <AnyType extends Comparable<? super AnyType>>
-	void mergeSort( AnyType [ ] a ) {
-		AnyType [ ] tmpArray = (AnyType[]) new Comparable[ a.length ];
+	public static void mergeSort(int[] array) {
+		int[] tmpArray = new int[array.length];
 
-		mergeSort( a, tmpArray, 0, a.length - 1 );
+		mergeSort( array, tmpArray, 0, array.length - 1 );
 	}
 
 	/**
@@ -22,8 +21,7 @@ public class CountingInversions {
 	 * @param left the left-most index of the subarray.
 	 * @param right the right-most index of the subarray.
 	 */
-	private static <AnyType extends Comparable<? super AnyType>>
-	void mergeSort( AnyType [ ] a, AnyType [ ] tmpArray, int left, int right ) {
+	private static void mergeSort( int[] a, int[] tmpArray, int left, int right ) {
 		if( left < right ) {
 			int center = ( left + right ) / 2;
 			mergeSort( a, tmpArray, left, center );
@@ -40,15 +38,14 @@ public class CountingInversions {
 	 * @param rightPos the index of the start of the second half.
 	 * @param rightEnd the right-most index of the subarray.
 	 */
-	private static <AnyType extends Comparable<? super AnyType>>
-	void merge( AnyType [ ] a, AnyType [ ] tmpArray, int leftPos, int rightPos, int rightEnd ) {
+	private static 	void merge( int[] a, int[] tmpArray, int leftPos, int rightPos, int rightEnd ) {
 		int leftEnd = rightPos - 1;
 		int tmpPos = leftPos;
 		int numElements = rightEnd - leftPos + 1;
 
 		// Main loop
 		while( leftPos <= leftEnd && rightPos <= rightEnd )
-			if( a[ leftPos ].compareTo( a[ rightPos ] ) <= 0 )
+			if( a[ leftPos ] <= a[rightPos])
 				tmpArray[ tmpPos++ ] = a[ leftPos++ ];
 			else
 				tmpArray[ tmpPos++ ] = a[ rightPos++ ];
