@@ -1,7 +1,7 @@
 import java.util.*;
 
 public class CountingInversions {
-	private static ArrayList<ArrayList<Integer>> inversions = new ArrayList<ArrayList<Integer>>();
+	private ArrayList<ArrayList<Integer>> inversions;
 	
 	public static void main(String[] args) {
 		CountingInversions inversionCounter = new CountingInversions();
@@ -14,17 +14,28 @@ public class CountingInversions {
 		// int[] array = {2, 4, 1, 3, 5};	//3 inversions
 		// int[] array = {1, 2, 3, 4};	//0 inversions
 		// int[] array = {3, 3, 3, 3};	//0 inversions
-		System.out.println("Inversion count = "+CountingInversions.mergeSort(array));
-		System.out.println(Arrays.toString( array ) );
-		System.out.println("Actual Inversions");
-		for(ArrayList<Integer> inversion : inversions){
-			System.out.println(inversion);
-		}
+		inversionCounter.mergeSort(array);
 	}
 
-	public static int mergeSort(int[] array) {
+	public int mergeSort(int[] array) {
+		inversions = new ArrayList<ArrayList<Integer>>();
+
+		System.out.println("Original array: "+Arrays.toString(array));
+
 		int[] tempArray = new int[array.length];
-		return mergeSort(array, tempArray, 0, array.length - 1);
+		int inversionCount = mergeSort(array, tempArray, 0, array.length - 1);
+
+		System.out.println("Inversion count = "+inversionCount);
+		if(!inversions.isEmpty()){
+			System.out.println("Sorted array: "+Arrays.toString(array));
+			System.out.println("Actual Inversions:");
+			for(ArrayList<Integer> inversion : inversions){
+				System.out.println(inversion);
+			}
+		}
+		System.out.println();
+
+		return inversionCount;
 	}
 
 	/**
@@ -34,7 +45,7 @@ public class CountingInversions {
 	 * @param left the left-most index of the subarray.
 	 * @param right the right-most index of the subarray.
 	 */
-	private static int mergeSort(int[] array, int[] tempArray, int leftIndex, int rightIndex) {
+	private int mergeSort(int[] array, int[] tempArray, int leftIndex, int rightIndex) {
 		int inversionCount = 0;
 		if( leftIndex < rightIndex ) {
 			int center = ( leftIndex + rightIndex ) / 2;
@@ -53,7 +64,7 @@ public class CountingInversions {
 	 * @param rightPos the index of the start of the second half.
 	 * @param rightEnd the right-most index of the subarray.
 	 */
-	private static int mergeAndCount(int[] array, int[] tempArray, int leftPos, int rightPos, int rightEnd) {
+	private int mergeAndCount(int[] array, int[] tempArray, int leftPos, int rightPos, int rightEnd) {
 		int inversionCount = 0;
 
 		int center = rightPos;
