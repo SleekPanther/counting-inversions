@@ -5,17 +5,18 @@ Finds how similar 2 lists of rating are using the Divide and Conquer approach. E
 Compare ratings of n items between 2 lists. How similar are they (how many inversions)?  
 1 list is ranked; 1, 2, 3, ... , n  
 The other list has arbitrary order: a<sub>1</sub>, a<sub>2</sub>, a<sub>3</sub>, ... , a<sub>n</sub> (values in the array at an index)  
-<img src="images/you-me-lists.png" width="200">  
+<img src="images/you-me-lists.png" width="300">  
 **Inversion:** index `i` is less then index `j`, but the value at `i` is greater than the value at `j` (`i` < `j`, but a<sub>i</sub> > a<sub>j</sub>)  
 **This example has 6 inversions: (4,1), (4,2), (4,3), (3,1), (3,2), (2,1)**
 
 To find the number of inversions, we can just write out the 2 lists & **draw lines connecting identical values**
-<img src="images/array1-crossed.png" width="200">  
-Now count the number of times these lines cross (actual inversions are in color parentheses)
-<img src="images/array1-inversions.png" width="200">  
+<img src="images/array1-crossed.png" width="400">  
+Now count the number of times these lines cross (actual inversions are in color parentheses)  
+<img src="images/array1-inversions.png" width="500">  
+Again, this example has 6 inversions: (4,1), (4,2), (4,3), (3,1), (3,2), (2,1)
 
 **If a list has no inversions, it is already sorted and no crossed lines**  
-<img src="images/no-inversions-crossed.png" width="200">
+<img src="images/no-inversions-crossed.png" width="300">  
 
 This reduces down to just comparing the 2nd list to its sorted order
 
@@ -24,7 +25,7 @@ Only requires a slight modification to MergeSort
 **When merging the 2 sublists, if a value is copied from the right half, then it is greater than all the remaining elements in the left half so the inversion could should increase by the number of elements remaining in the left half**  
 **This is a *Split Inversion***  
 MergeSort stages:  
-<img src="images/array1-mergesort-divide.png" width="200">  
+![](images/array1-mergesort-divide.png)  
 *In the actual algorithm, the left half happens 1st, but I write both divide steps here for simplicity*  
 - In **Merge 1**, the item from the right half (`3`) is copied 1st so we have an inversion (4,3)
 - In **Merge 2**, item from the right half (`1`) is copied 1st so we have the inversion (2,1)
