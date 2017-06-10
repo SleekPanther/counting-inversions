@@ -5,27 +5,36 @@ public class CountingInversions {
 	
 	public static void main(String[] args) {
 		CountingInversions inversionCounter = new CountingInversions();
-		
-		int[] array = {1, 20, 6, 4, 5};	//5 inversions
-		// int[] array = {1,3,5,2,4,6};	//3 inversions
-//		int[] array = {3,2,1};	//3 inversions
-//		int[] array = {4,3,2,1};	//6 inversions
-//		int[] array = {5,4,3,2,1};	//10 inversions
-		// int[] array = {2, 4, 1, 3, 5};	//3 inversions
-		// int[] array = {1, 2, 3, 4};	//0 inversions
-		// int[] array = {3, 3, 3, 3};	//0 inversions
-		inversionCounter.mergeSort(array);
+
+		int[] array1 = {4, 3, 2, 1};	//6 inversions
+		inversionCounter.mergeSort(array1);
+
+		int[] array2 = {1, 3, 5, 2, 4, 6};	//3 inversions
+		inversionCounter.mergeSort(array2);
+
+		int[] array3 = {1, 20, 6, 4, 5};	//5 inversions
+		inversionCounter.mergeSort(array3);
+
+		int[] array4 = {5, 4, 3, 2, 1};	//10 inversions
+		inversionCounter.mergeSort(array4);
+
+		int[] array5 = {1, 2, 3, 4};	//0 inversions
+		inversionCounter.mergeSort(array5);
+
+		int[] array6 = {3, 3, 3, 3};	//0 inversions
+		inversionCounter.mergeSort(array6);
 	}
 
+	//Public method to abstract away the recursive details of mergesort
 	public int mergeSort(int[] array) {
-		inversions = new ArrayList<ArrayList<Integer>>();
+		inversions = new ArrayList<ArrayList<Integer>>();		//reset the list of inversions from any previous call
 
 		System.out.println("Original array: "+Arrays.toString(array));
 
 		int[] tempArray = new int[array.length];
-		int inversionCount = mergeSort(array, tempArray, 0, array.length - 1);
+		int inversionCount = mergeSort(array, tempArray, 0, array.length - 1);		//Call the recursive mergeSort
 
-		System.out.println("Inversion count = "+inversionCount);
+		System.out.println("Inversion Count = "+inversionCount);
 		if(!inversions.isEmpty()){
 			System.out.println("Sorted array: "+Arrays.toString(array));
 			System.out.println("Actual Inversions:");
@@ -38,13 +47,7 @@ public class CountingInversions {
 		return inversionCount;
 	}
 
-	/**
-	 * Internal method that makes recursive calls.
-	 * @param a an array of Comparable items.
-	 * @param tempArray an array to place the merged result.
-	 * @param left the left-most index of the subarray.
-	 * @param right the right-most index of the subarray.
-	 */
+	//Recursive mergeSort
 	private int mergeSort(int[] array, int[] tempArray, int leftIndex, int rightIndex) {
 		int inversionCount = 0;
 		if( leftIndex < rightIndex ) {
@@ -56,14 +59,7 @@ public class CountingInversions {
 		return inversionCount;
 	}
 
-	/**
-	 * Internal method that merges two sorted halves of a subarray.
-	 * @param a an array of Comparable items.
-	 * @param tempArray an array to place the merged result.
-	 * @param leftPos the left-most index of the subarray.
-	 * @param rightPos the index of the start of the second half.
-	 * @param rightEnd the right-most index of the subarray.
-	 */
+	//Merges 2 sub-arrays & counts split inversions inversions between the 2
 	private int mergeAndCount(int[] array, int[] tempArray, int leftPos, int rightPos, int rightEnd) {
 		int inversionCount = 0;
 
@@ -87,6 +83,7 @@ public class CountingInversions {
 				}
 			}
 		}
+		
 		
 		while( leftPos <= leftEnd ){		// Copy rest of first half
 			tempArray[ tempPos++ ] = array[ leftPos++ ];
