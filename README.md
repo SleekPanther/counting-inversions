@@ -10,7 +10,7 @@ The other list has arbitrary order: a<sub>1</sub>, a<sub>2</sub>, a<sub>3</sub>,
 **This example has 6 inversions: (4,1), (4,2), (4,3), (3,1), (3,2), (2,1)**
 
 **Use the *array index* as the reference ranking and the *array entry* as the compared ranking**  
-To find the number of inversions, we can just write out the 2nd list below the 1st lists which is in sorted order & **draw lines connecting identical values**
+To find the number of inversions, we can just write out the 2nd list below the 1st lists which is in sorted order & **draw lines connecting identical values**  
 <img src="images/array1-crossed.png" width="400">  
 Now count the number of **times these lines cross** (actual inversions are in colored parentheses)  
 <img src="images/array1-inversions.png" width="500">  
