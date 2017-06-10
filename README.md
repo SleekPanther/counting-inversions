@@ -9,9 +9,10 @@ The other list has arbitrary order: a<sub>1</sub>, a<sub>2</sub>, a<sub>3</sub>,
 **Inversion:** index `i` is less then index `j`, but the value at `i` is greater than the value at `j` (`i` < `j`, but a<sub>i</sub> > a<sub>j</sub>)  
 **This example has 6 inversions: (4,1), (4,2), (4,3), (3,1), (3,2), (2,1)**
 
-To find the number of inversions, we can just write out the 2 lists & **draw lines connecting identical values**
+**Use the *array index* as the reference ranking and the *array entry* as the compared ranking**  
+To find the number of inversions, we can just write out the 2nd list below the 1st lists which is in sorted order & **draw lines connecting identical values**
 <img src="images/array1-crossed.png" width="400">  
-Now count the number of times these lines cross (actual inversions are in color parentheses)  
+Now count the number of **times these lines cross** (actual inversions are in colored parentheses)  
 <img src="images/array1-inversions.png" width="500">  
 Again, this example has 6 inversions: (4,1), (4,2), (4,3), (3,1), (3,2), (2,1)
 
@@ -22,6 +23,7 @@ This reduces down to just comparing the 2nd list to its sorted order
 
 ## Solution
 Only requires a slight modification to MergeSort  
+![](images/pseudocode.png)  
 **When merging the 2 sublists, if a value is copied from the right half, then it is greater than all the remaining elements in the left half so the inversion could should increase by the number of elements remaining in the left half**  
 **This is a *Split Inversion***  
 MergeSort stages:  
@@ -34,6 +36,11 @@ MergeSort stages:
 
 Divide step is the same, but now count the number of inversions in the left half, right half & split inversions  
 The Divide stage counts the inversion in the left & right halves, split inversions are counted in the Merge stage
+
+## Runtime
+T(n) ≤ T(⌊n/2⌋)+ T(| n/2 |)+ O(n)  
+⇒ **T(n) = O(n log n)**  
+(by solving the same recurrence relation as MergeSort)
 
 ## Code Details
 - Return types of the classic mergeSort have been changed to `int` since they now return the number of inversions as well as sorting
